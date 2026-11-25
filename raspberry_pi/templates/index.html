@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <title>EdgePCB-AI</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 20px;
+            background: #f1f5f9;
+            color: #172033;
+        }
+
+        h1 {
+            color: #0f766e;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: #e2e8f0;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>EdgePCB-AI</h1>
+
+<p>Standalone Dual-Board PCB Inspection System</p>
+
+<div class="card">
+
+    <h2>Inspection History</h2>
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Time</th>
+                <th>Status</th>
+                <th>Severity</th>
+                <th>Defects</th>
+                <th>Guidance</th>
+            </tr>
+        </thead>
+
+        <tbody id="tableBody"></tbody>
+
+    </table>
+
+</div>
+
+<script>
+
+async function loadHistory() {
+
+    try {
+
+        const response = await fetch("/api/history");
+
+        const records = await response.json();
+
+        const body = document.getElementById("tableBody");
+
+        body.innerHTML = "";
+
+        records.forEach(record => {
+
+            const row = document.createElement("tr");
+
+            const fields = [
+                record.id,
+                record.timestamp,
+                record.status,
+                record.severity,
+                record.defects,
+                record.guidance
+            ];
+
+            fields.forEach((field, index) => {
+
+                const cell = document.createElement("td");
+
+                if (index === 4) {
+
+                    const pre = document.createElement("pre");
+
+                    pre.textContent = field;
+
+                    cell.appendChild(pre);
+
+                } else {
+
+                    cell.textContent = field ?? "";
+
+                }
+
+                row.appendChild(cell);
+
+            });
+
+            body.appendChild(row);
+
+        });
+
+    } catch (error) {
+
+        console.log("Dashboard error:", error);
+
+    }
+
+}
+
+loadHistory();
+
+setInterval(loadHistory, 5000);
+
+</script>
+
+</body>
+</html>

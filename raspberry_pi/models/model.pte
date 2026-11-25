@@ -1,0 +1,31 @@
+
+EDGEPCB-AI EXECUTORCH MODEL
+
+Project: EdgePCB-AI PCB Defect Inspection
+Model Name: Llama Quantized Language Model
+Target Hardware: Raspberry Pi 4
+Runtime: ExecuTorch
+Model Format: PTE
+Model Type: Language Model
+Purpose: PCB Defect Analysis and Operator Guidance
+
+Input:
+PCB inspection JSON received from PYNQ-Z2.
+
+Processing:
+Analyze PCB defect names, confidence scores,
+severity classifications, repairability status,
+and inspection status.
+
+Output:
+Natural-language PCB inspection guidance,
+recommended inspection actions,
+repair recommendations, and quality-control advice.
+
+Deployment Status: PENDING
+Model Export Status: PENDING
+
+Note:
+This is a placeholder description.
+It is not a compiled ExecuTorch model.
+Replace with the actual exported .pte model.

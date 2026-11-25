@@ -1,0 +1,9 @@
+{
+  "serial_port": "/dev/serial0",
+  "baudrate": 115200,
+  "runner_path": "./llama_runner",
+  "model_path": "./models/model.pte",
+  "tokenizer_path": "./models/tokenizer.model",
+  "timeout": 60,
+  "database": "inspection.db"
+}

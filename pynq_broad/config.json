@@ -1,0 +1,18 @@
+{
+  "serial_port": "/dev/ttyPS0",
+  "baudrate": 115200,
+  "confidence_threshold": 0.25,
+  "severity_rules": {
+    "mouse_bite": "MEDIUM",
+    "spur": "LOW",
+    "missing_hole": "HIGH",
+    "short": "CRITICAL",
+    "open_circuit": "CRITICAL",
+    "spurious_copper": "MEDIUM"
+  },
+  "reworkable_classes": [
+    "mouse_bite",
+    "spur",
+    "spurious_copper"
+  ]
+}

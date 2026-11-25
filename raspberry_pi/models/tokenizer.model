@@ -1,0 +1,27 @@
+
+EDGEPCB-AI TOKENIZER
+
+Project: EdgePCB-AI PCB Defect Inspection
+Model Family: Llama
+Target Hardware: Raspberry Pi 4
+Runtime: ExecuTorch
+Tokenizer File: tokenizer.model
+
+Purpose:
+Convert PCB inspection prompts into model tokens
+and convert generated model tokens into readable text.
+
+Input Text:
+PCB inspection data and operator guidance prompts.
+
+Output:
+Tokenized input and decoded natural-language text.
+
+Tokenizer Status: PENDING
+Deployment Status: PENDING
+
+Note:
+This is a placeholder description.
+It is not an actual tokenizer vocabulary.
+Replace with the tokenizer file compatible
+with the deployed Llama model.
