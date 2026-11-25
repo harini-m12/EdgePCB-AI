@@ -1,8 +1,8 @@
-EdgePCB-AI
+# EdgePCB-AI
 
-Intelligent Edge-Based PCB Defect Detection, Severity Assessment and Repairability Analysis with AI-Assisted Inspection
+## Intelligent Edge-Based PCB Defect Detection, Severity Assessment and Repairability Analysis with AI-Assisted Inspection
 
-1. Introduction
+## 1. Introduction
 
 EdgePCB-AI is a smart edge-based Printed Circuit Board (PCB) inspection solution designed to automatically detect PCB defects, assess their severity and analyse their potential repairability using computer vision and edge computing technologies.
 
@@ -12,7 +12,9 @@ A Raspberry Pi 4 is proposed as a secondary edge device for processing inspectio
 
 The PYNQ-Z2 and Raspberry Pi 4 are designed to communicate through UART. Only compact inspection data is transferred between the boards; camera images and video are not transmitted. The proposed architecture does not require internet connectivity or Ethernet communication between the boards.
 
-2. Background
+---
+
+## 2. Background
 
 Printed Circuit Boards (PCBs) are fundamental components of electronic systems. Defects introduced during manufacturing can affect electrical performance, reliability and product quality.
 
@@ -20,7 +22,9 @@ PCB inspection may involve manual examination, specialised inspection equipment 
 
 An efficient, low-cost and self-contained edge-based inspection system is therefore required to automatically detect PCB defects, assess their severity, analyse potential repairability and provide AI-assisted inspection guidance.
 
-3. Proposed Solution
+---
+
+## 3. Proposed Solution
 
 EdgePCB-AI proposes a dual-board edge intelligence architecture for automated PCB quality inspection.
 
@@ -32,334 +36,188 @@ The Raspberry Pi 4 is planned as the secondary edge device for inspection-data p
 
 Only compact inspection data is exchanged between the devices.
 
-4. Objectives
+---
 
-Automatically inspect PCBs for defects.
+## 4. Objectives
 
-Implement YOLO ONNX inference on the PYNQ-Z2 ARM processor.
+- Automatically inspect PCBs for defects.
+- Implement YOLO ONNX inference on the PYNQ-Z2 ARM processor.
+- Identify PCB defects.
+- Classify PCB defects according to severity.
+- Analyse potential repairability.
+- Display inspection results through HDMI.
+- Transfer inspection data through UART.
+- Provide AI-assisted inspection guidance using a quantised Llama model.
+- Manage inspection records using SQLite.
+- Enable local dashboard functionality.
 
-Identify PCB defects.
+---
 
-Classify PCB defects according to severity.
+## 5. System Architecture
 
-Analyse potential repairability.
-
-Display inspection results through HDMI.
-
-Transfer inspection data through UART.
-
-Provide AI-assisted inspection guidance using a quantised Llama model.
-
-Manage inspection records using SQLite.
-
-Enable local dashboard functionality.
-
-5. System Architecture
-
-PYNQ-Z2 — Primary Edge Device
+### PYNQ-Z2 — Primary Edge Device
 
 The PYNQ-Z2 performs the primary PCB inspection and edge processing.
 
-Processing Pipeline:
+**Processing Pipeline:**
 
 USB Camera → OpenCV Preprocessing → YOLO ONNX Runtime CPU → Non-Maximum Suppression → Defect Identification → Severity Assessment → Repairability Analysis → HDMI Display → UART Transmission
 
-Functions:
+**Functions:**
 
-USB camera image acquisition.
+- USB camera image acquisition.
+- Image preprocessing and resizing.
+- YOLO ONNX inference using ARM CPU.
+- Bounding-box generation.
+- Confidence score extraction.
+- Non-Maximum Suppression.
+- Defect identification.
+- Severity classification.
+- Repairability analysis.
+- HDMI inspection visualisation.
+- UART inspection-data transmission.
 
-Image preprocessing and resizing.
-
-YOLO ONNX inference using ARM CPU.
-
-Bounding-box generation.
-
-Confidence score extraction.
-
-Non-Maximum Suppression.
-
-Defect identification.
-
-Severity classification.
-
-Repairability analysis.
-
-HDMI inspection visualisation.
-
-UART inspection-data transmission.
-
-Raspberry Pi 4 — Secondary Edge Device (Planned)
+### Raspberry Pi 4 — Secondary Edge Device (Planned)
 
 The Raspberry Pi 4 is proposed to perform inspection-data processing and AI-assisted inspection support.
 
-Processing Pipeline:
+**Processing Pipeline:**
 
 UART Receiver → Data Validation → ExecuTorch Llama Inference → Operator Guidance → SQLite Database → Local Dashboard
 
-Functions:
+**Functions:**
 
-Receive inspection data.
+- Receive inspection data.
+- Validate inspection messages.
+- Generate AI-assisted inspection guidance.
+- Manage inspection records.
+- Maintain inspection history.
+- Provide local dashboard functionality.
 
-Validate inspection messages.
+---
 
-Generate AI-assisted inspection guidance.
+## 6. Hardware Requirements
 
-Manage inspection records.
+| Hardware | Function |
+|---|---|
+| PYNQ-Z2 | PCB inspection and edge processing |
+| USB Camera | PCB image acquisition |
+| HDMI Display | Inspection-result visualisation |
+| Raspberry Pi 4 | Planned AI guidance and inspection-data management |
+| UART Interface | Serial communication between boards |
+| PCB Samples | Inspection and testing |
 
-Maintain inspection history.
+---
 
-Provide local dashboard functionality.
+## 7. Software and Technologies
 
-6. Hardware Requirements
+| Technology | Application |
+|---|---|
+| Python | System development |
+| OpenCV | Image acquisition and preprocessing |
+| YOLO | PCB defect detection |
+| ONNX | Model representation |
+| ONNX Runtime | CPU-based model inference |
+| NumPy | Image and numerical processing |
+| PYNQ | Embedded FPGA board platform |
+| PySerial | UART communication |
+| SQLite | Inspection-data management |
+| Flask | Local dashboard |
+| ExecuTorch | Planned LLM inference runtime |
+| Quantised Llama | Planned AI-assisted inspection guidance |
 
-Hardware
+---
 
-Function
-
-PYNQ-Z2
-
-PCB inspection and edge processing
-
-USB Camera
-
-PCB image acquisition
-
-HDMI Display
-
-Inspection-result visualisation
-
-Raspberry Pi 4
-
-Planned AI guidance and inspection-data management
-
-UART Interface
-
-Serial communication between boards
-
-PCB Samples
-
-Inspection and testing
-
-7. Software and Technologies
-
-Technology
-
-Application
-
-Python
-
-System development
-
-OpenCV
-
-Image acquisition and preprocessing
-
-YOLO
-
-PCB defect detection
-
-ONNX
-
-Model representation
-
-ONNX Runtime
-
-CPU-based model inference
-
-NumPy
-
-Image and numerical processing
-
-PYNQ
-
-Embedded FPGA board platform
-
-PySerial
-
-UART communication
-
-SQLite
-
-Inspection-data management
-
-Flask
-
-Local dashboard
-
-ExecuTorch
-
-Planned LLM inference runtime
-
-Quantised Llama
-
-Planned AI-assisted inspection guidance
-
-8. PCB Defect Identification
+## 8. PCB Defect Identification
 
 The system supports the identification of the following PCB defect categories:
 
-Defect
-
-Description
-
-Mouse Bite
-
-Irregular PCB edge damage
-
-Spur
-
-Unwanted copper protrusion
-
-Missing Hole
-
-Missing drilled hole
-
-Short
-
-Unintended electrical connection
-
-Open Circuit
-
-Interrupted electrical connection
-
-Spurious Copper
-
-Unwanted copper region
+| Defect | Description |
+|---|---|
+| Mouse Bite | Irregular PCB edge damage |
+| Spur | Unwanted copper protrusion |
+| Missing Hole | Missing drilled hole |
+| Short | Unintended electrical connection |
+| Open Circuit | Interrupted electrical connection |
+| Spurious Copper | Unwanted copper region |
 
 The YOLO ONNX model detects defects and generates bounding boxes and confidence scores for the detected regions.
 
-9. Severity Assessment
+---
+
+## 9. Severity Assessment
 
 Severity values are assigned to detected PCB defects using predefined rule-based classification.
 
-Defect
-
-Example Severity
-
-Mouse Bite
-
-MEDIUM
-
-Spur
-
-LOW
-
-Missing Hole
-
-HIGH
-
-Short
-
-CRITICAL
-
-Open Circuit
-
-CRITICAL
-
-Spurious Copper
-
-MEDIUM
+| Defect | Example Severity |
+|---|---|
+| Mouse Bite | MEDIUM |
+| Spur | LOW |
+| Missing Hole | HIGH |
+| Short | CRITICAL |
+| Open Circuit | CRITICAL |
+| Spurious Copper | MEDIUM |
 
 The overall inspection severity is determined using the highest assigned severity among the detected defects.
 
 These are project-defined example rules and require validation against relevant PCB manufacturing and quality criteria.
 
-10. Repairability Analysis
+---
+
+## 10. Repairability Analysis
 
 The system provides preliminary repairability classification using predefined rules.
 
-Defect
-
-Example Repairability
-
-Mouse Bite
-
-REWORKABLE
-
-Spur
-
-REWORKABLE
-
-Spurious Copper
-
-REWORKABLE
-
-Missing Hole
-
-NON-REWORKABLE
-
-Short
-
-NON-REWORKABLE
-
-Open Circuit
-
-NON-REWORKABLE
+| Defect | Example Repairability |
+|---|---|
+| Mouse Bite | REWORKABLE |
+| Spur | REWORKABLE |
+| Spurious Copper | REWORKABLE |
+| Missing Hole | NON-REWORKABLE |
+| Short | NON-REWORKABLE |
+| Open Circuit | NON-REWORKABLE |
 
 Repairability classification is intended to support inspection decisions. Actual repair and product acceptance decisions must be verified by qualified personnel in accordance with manufacturing criteria and board-specific requirements.
 
-11. Edge AI Processing
+---
+
+## 11. Edge AI Processing
 
 The PYNQ-Z2 ARM processor runs YOLO ONNX inference using ONNX Runtime to perform local PCB inspection.
 
-Processing Steps
+### Processing Steps
 
-Acquire images using the USB camera.
-
-Preprocess and resize images.
-
-Execute YOLO ONNX inference.
-
-Extract defect bounding boxes and confidence values.
-
-Apply Non-Maximum Suppression.
-
-Identify detected defect categories.
-
-Classify defects according to severity.
-
-Analyse potential repairability.
-
-Display inspection results through HDMI.
-
-Transfer compact inspection data through UART.
+1. Acquire images using the USB camera.
+2. Preprocess and resize images.
+3. Execute YOLO ONNX inference.
+4. Extract defect bounding boxes and confidence values.
+5. Apply Non-Maximum Suppression.
+6. Identify detected defect categories.
+7. Classify defects according to severity.
+8. Analyse potential repairability.
+9. Display inspection results through HDMI.
+10. Transfer compact inspection data through UART.
 
 High-resolution image or video transfer between the boards is not required.
 
-12. UART Communication
+---
+
+## 12. UART Communication
 
 UART is used to transfer compact PCB inspection data from the PYNQ-Z2 to the Raspberry Pi 4.
 
-Parameter
+| Parameter | Configuration |
+|---|---|
+| Interface | UART |
+| Baud Rate | 115200 |
+| Data Format | JSON |
+| Message Termination | Newline |
+| Communication | Serial |
+| Image Transfer | Not used |
 
-Configuration
+### Example Inspection Message
 
-Interface
-
-UART
-
-Baud Rate
-
-115200
-
-Data Format
-
-JSON
-
-Message Termination
-
-Newline
-
-Communication
-
-Serial
-
-Image Transfer
-
-Not used
-
-Example Inspection Message
-
+```json
 {
   "id": 12,
   "status": "DEFECT DETECTED",
@@ -380,85 +238,55 @@ Example Inspection Message
     }
   ]
 }
+```
 
 Only compact inspection information is transferred. Camera images and video frames are not transmitted through UART.
 
-13. AI-Assisted Inspection (Planned)
+---
+
+## 13. AI-Assisted Inspection (Planned)
 
 A quantised Llama model is proposed for deployment on the Raspberry Pi 4 using ExecuTorch.
 
 The model is intended to analyse structured inspection data containing defect types, severity classifications, confidence values and repairability information.
 
-Planned AI Functions
+### Planned AI Functions
 
-Explain detected PCB defects.
-
-Generate inspection summaries.
-
-Suggest inspection and verification procedures.
-
-Provide preliminary repair guidance.
-
-Assist operators in understanding inspection results.
+- Explain detected PCB defects.
+- Generate inspection summaries.
+- Suggest inspection and verification procedures.
+- Provide preliminary repair guidance.
+- Assist operators in understanding inspection results.
 
 AI-assisted guidance is intended to support decision-making and is not a standalone product acceptance tool.
 
-14. Model Deployment Status
+---
+
+## 14. Model Deployment Status
 
 Raspberry Pi 4 model deployment is planned for future hardware development.
 
-Component
-
-Status
-
-YOLO ONNX Model
-
-Prepared for PYNQ deployment
-
-ONNX Runtime
-
-Implemented in detector pipeline
-
-Severity Assessment
-
-Rule-based implementation
-
-Repairability Analysis
-
-Rule-based implementation
-
-UART Communication
-
-Code provided; hardware testing pending
-
-Raspberry Pi 4
-
-Planned hardware
-
-ExecuTorch
-
-Planned deployment
-
-Quantised Llama
-
-Planned deployment
-
-Tokenizer
-
-Planned deployment
-
-SQLite Database
-
-Raspberry Pi software component
-
-Local Dashboard
-
-Raspberry Pi software component
+| Component | Status |
+|---|---|
+| YOLO ONNX Model | Prepared for PYNQ deployment |
+| ONNX Runtime | Implemented in detector pipeline |
+| Severity Assessment | Rule-based implementation |
+| Repairability Analysis | Rule-based implementation |
+| UART Communication | Code provided; hardware testing pending |
+| Raspberry Pi 4 | Planned hardware |
+| ExecuTorch | Planned deployment |
+| Quantised Llama | Planned deployment |
+| Tokenizer | Planned deployment |
+| SQLite Database | Raspberry Pi software component |
+| Local Dashboard | Raspberry Pi software component |
 
 The model-related files currently provided are documentation placeholders and are not deployable neural-network model artifacts.
 
-15. Project Structure
+---
 
+## 15. Project Structure
+
+```text
 EdgePCB-AI/
 │
 ├── README.md
@@ -484,31 +312,41 @@ EdgePCB-AI/
     │
     └── templates/
         └── index.html
+```
 
-16. Installation and Operation
+---
 
-PYNQ-Z2
+## 16. Installation and Operation
+
+### PYNQ-Z2
 
 Install or verify compatible packages:
 
+```bash
 pip install numpy opencv-python pyserial onnxruntime
+```
 
 Run the PCB inspection program:
 
+```bash
 cd pynq_board
 python3 pcb_detector.py
+```
 
 The system will access the USB camera, process images, detect PCB defects, assess severity and repairability, display inspection results through HDMI and transmit compact inspection messages through UART.
 
-Raspberry Pi 4 (Planned Deployment)
+### Raspberry Pi 4 (Planned Deployment)
 
 Install the required software:
 
+```bash
 sudo apt update
 sudo apt install python3-venv python3-pip
+```
 
 Create a Python virtual environment:
 
+```bash
 cd raspberry_pi
 
 python3 -m venv .venv
@@ -516,120 +354,92 @@ python3 -m venv .venv
 source .venv/bin/activate
 
 pip install -r requirements.txt
+```
 
 UART configuration, ExecuTorch runtime installation and model deployment will be required when the Raspberry Pi 4 becomes available.
 
-17. Expected Outputs
+---
 
-PCB with Defects
+## 17. Expected Outputs
+
+### PCB with Defects
 
 The inspection system is expected to display:
 
-Inspection status.
+- Inspection status.
+- Defect types.
+- Bounding boxes.
+- Confidence values.
+- Defect count.
+- Severity classification.
+- Repairability classification.
+- Processing latency.
 
-Defect types.
+### PCB without Detected Defects
 
-Bounding boxes.
-
-Confidence values.
-
-Defect count.
-
-Severity classification.
-
-Repairability classification.
-
-Processing latency.
-
-PCB without Detected Defects
-
-Status: NO DEFECT
-
-Severity: NONE
-
-Defect count: 0
+- Status: `NO DEFECT`
+- Severity: `NONE`
+- Defect count: `0`
 
 A no-detection result does not guarantee that the PCB is defect-free.
 
-AI-Assisted Inspection Guidance (Planned)
+### AI-Assisted Inspection Guidance (Planned)
 
 The Raspberry Pi 4 is planned to provide:
 
-Inspection summaries.
+- Inspection summaries.
+- Defect explanations.
+- Verification recommendations.
+- Preliminary repair guidance.
+- Quality-control assistance.
 
-Defect explanations.
+---
 
-Verification recommendations.
+## 18. Benefits
 
-Preliminary repair guidance.
+- Edge-based PCB inspection.
+- Self-contained inspection architecture.
+- No internet dependency during inspection.
+- No Ethernet communication between boards.
+- CPU-based ONNX inference on the PYNQ-Z2 ARM processor.
+- Compact UART data transmission.
+- HDMI inspection visualisation.
+- Severity assessment.
+- Repairability analysis.
+- Future AI-assisted inspection guidance.
+- Local inspection-data management.
+- Dual-board edge intelligence architecture.
 
-Quality-control assistance.
+---
 
-18. Benefits
+## 19. Limitations
 
-Edge-based PCB inspection.
+- Defect detection performance depends on the training and validation datasets.
+- Model confidence does not necessarily represent actual detection accuracy.
+- Severity rules require validation.
+- Repairability classifications are preliminary.
+- Raspberry Pi 4 hardware is not yet available.
+- ExecuTorch model compatibility and resource utilisation require investigation.
+- AI-assisted guidance must be verified by engineering personnel.
+- UART communication must be validated on the actual hardware.
 
-Self-contained inspection architecture.
+---
 
-No internet dependency during inspection.
+## 20. Future Development
 
-No Ethernet communication between boards.
+- Deploy a quantised Llama model using ExecuTorch.
+- Implement AI-assisted inspection guidance.
+- Develop a local inspection dashboard.
+- Improve PCB defect detection using expanded datasets.
+- Validate severity rules against manufacturing criteria.
+- Optimise edge inference latency.
+- Implement inspection analytics.
+- Develop automated inspection reports.
+- Investigate resource utilisation across both boards.
 
-CPU-based ONNX inference on the PYNQ-Z2 ARM processor.
+---
 
-Compact UART data transmission.
-
-HDMI inspection visualisation.
-
-Severity assessment.
-
-Repairability analysis.
-
-Future AI-assisted inspection guidance.
-
-Local inspection-data management.
-
-Dual-board edge intelligence architecture.
-
-19. Limitations
-
-Defect detection performance depends on the training and validation datasets.
-
-Model confidence does not necessarily represent actual detection accuracy.
-
-Severity rules require validation.
-
-Repairability classifications are preliminary.
-
-Raspberry Pi 4 hardware is not yet available.
-
-ExecuTorch model compatibility and resource utilisation require investigation.
-
-AI-assisted guidance must be verified by engineering personnel.
-
-UART communication must be validated on the actual hardware.
-
-20. Future Development
-
-Deploy a quantised Llama model using ExecuTorch.
-
-Implement AI-assisted inspection guidance.
-
-Develop a local inspection dashboard.
-
-Improve PCB defect detection using expanded datasets.
-
-Validate severity rules against manufacturing criteria.
-
-Optimise edge inference latency.
-
-Implement inspection analytics.
-
-Develop automated inspection reports.
-
-Investigate resource utilisation across both boards.
-
-21. Conclusion
+## 21. Conclusion
 
 EdgePCB-AI proposes a self-contained edge intelligence system for automated PCB defect detection, severity assessment and repairability analysis.
 
@@ -639,40 +449,20 @@ A Raspberry Pi 4 is proposed as a secondary edge device for AI-assisted inspecti
 
 Together, the PYNQ-Z2 and Raspberry Pi 4 are intended to form a modular edge intelligence system combining embedded computer vision, edge processing and AI-assisted inspection for PCB quality-control applications.
 
-Project Information
+---
 
-Parameter
+## Project Information
 
-Description
+| Parameter | Description |
+|---|---|
+| Project Name | EdgePCB-AI |
+| Project Title | Intelligent Edge-Based PCB Defect Detection, Severity Assessment and Repairability Analysis with AI-Assisted Inspection |
+| Primary Edge Device | PYNQ-Z2 |
+| Secondary Edge Device | Raspberry Pi 4 (Planned) |
+| Communication | UART |
+| Detection Runtime | ONNX Runtime |
+| Future AI Runtime | ExecuTorch |
+| Application | Automated PCB Quality Inspection |
 
-Project Name
+---
 
-EdgePCB-AI
-
-Project Title
-
-Intelligent Edge-Based PCB Defect Detection, Severity Assessment and Repairability Analysis with AI-Assisted Inspection
-
-Primary Edge Device
-
-PYNQ-Z2
-
-Secondary Edge Device
-
-Raspberry Pi 4 (Planned)
-
-Communication
-
-UART
-
-Detection Runtime
-
-ONNX Runtime
-
-Future AI Runtime
-
-ExecuTorch
-
-Application
-
-Automated PCB Quality Inspection
